@@ -1,0 +1,41 @@
+---
+- name: configure arch
+  hosts: "{{ hosts }}"
+  become: true
+  vars:
+    desktop_environment: hyprland # future
+  
+  pre_tasks:
+    - name: check user permission
+      user:
+        name: "{{ target_user }}"
+        groups: "wheel,audio,video,input,storage"
+        append: yes
+      when: desktop_environment is defined
+    
+  roles:
+    - role: common
+    - role: hyprland
+      when: desktop_environment == 'hyprland'
+    # - role: kde
+    #   when: desktop_environment == 'kde'
+    # - role: gnome
+    #   when: desktop_environment == 'gnome'
+
+  post_tasks:
+    - name: update & cleanup
+      pacman:
+        update_cache: yes
+        upgrade: yes
+        force: yes
+        extra_args: "--noconfirm"
+    
+    - name: remove unused packages & clean cache
+      pacman:
+        clean: yes
+        state: absent
+        extra_args: "--noconfirm -Rs"
+
+    - name: reboot if needed
+      ansible.builtin.reboot:
+      when: desktop_environment is defined and desktop_environment != 'none'

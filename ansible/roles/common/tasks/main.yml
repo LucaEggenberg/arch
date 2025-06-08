@@ -1,0 +1,60 @@
+---
+# general configuration
+- name: ensure pacman mirrors are updated
+  pacman:
+    update_cache: yes
+    extra_args: "--noconfirm"
+
+- name: install common packages
+  pacman:
+    name:
+      - vim
+      - wget
+      - curl
+      - htop             # Process viewer
+      - neofetch         # System info tool
+      - ufw              # Firewall
+      - networkmanager   # Ensure it's installed (should be from pacstrap)
+      - pipewire         # Modern audio server
+      - wireplumber      # Session manager for PipeWire
+      - pipewire-alsa    # ALSA compatibility
+      - pipewire-pulse   # PulseAudio compatibility
+      - pipewire-jack    # JACK compatibility
+      - xdg-utils        # Essential for opening links/files
+      - bluez            # Bluetooth stack
+      - bluez-utils      # Bluetooth utilities
+      - sddm             # Display manager
+      - noto-fonts       # General font support
+      - ttf-dejavu       # Common font
+      - ttf-liberation   # Common font
+      - ttf-font-awesome # For icons in status bars
+      - rsync            # For efficient file syncing
+      - base-devel       # Ensures build tools are present (should be from install.sh)
+    state: present
+    extra_args: "--noconfirm"
+
+- name: enable and start networkmanager service
+  systemd:
+    name: NetworkManager
+    enabled: yes
+    state: started
+  
+- name: Configure UFW
+  ufw:
+    state: enabled
+    policy: deny
+  notify: Restart UFW
+
+- name: allow ssh through Firewall
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+    state: enabled
+  notify: Restart UFW
+
+- name: set time-sync
+  systemd:
+    name: systemd-timesyncd.service
+    enabled: yes
+    state: started
