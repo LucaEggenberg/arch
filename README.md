@@ -57,7 +57,7 @@ swapon  /dev/swap_partition
 
 ### 6. install essentials 
 ```bash
-pacstrap /mnt base linux linux-firmware grub efibootmgr networkmanager git vi nano sudo
+pacstrap /mnt base linux linux-firmware grub efibootmgr networkmanager git vi nano sudo python
 ```
 
 ### 7. base configuration

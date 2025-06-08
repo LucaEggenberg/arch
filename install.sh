@@ -7,17 +7,32 @@ OK="$(tput setaf 2)[OK]$(tput sgr0)"
 ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
 DEBUG="$(tput setaf 3)[DEBUG]$(tput sgr0)"
 INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
+CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+RESET="$(tput sgr0)"
 
 # -- set log path --
-LOG="install-logs/$(date + %Y-%m-%d_%H-%M-%S).log"
-mkdir -p install-logs
+if [ -d install-logs ]; then
+    mkdir install-logs
+fi
+
+LOG="install-logs/00-bootstrap-$(date + %Y-%m-%d_%H-%M-%S).log"
 
 # -- function defs --
 execute_script() {
     local script="$1"
     if [ -f "$script" ]; then
+        echo "${INFO} executing $script..." | tee -a "$LOG"
         chmod +x "$script";
-        echo "${INFO} running $script..." | tee -a "$LOG"
+        if [ -x $script ]; then
+            env "$script" | tee -a "$LOG" 2>&1
+            if [ $? -ne 0 ]; then
+                echo "${ERROR} script '$script' failed" | tee -a "$LOG"
+                exit 1
+            fi
+        else
+            echo "${ERROR} failed to make '$script' executable" | tee -a "$LOG"
+            exit 1
+        fi
     else 
         echo "${ERROR} script $script not found" | tee -a "$LOG"
     fi
@@ -42,6 +57,39 @@ else
 fi
 
 # -- installation --
-echo "${INFO} installing yay..." | tee -a "$LOG"
+printf "\n" | tee -a "$LOG"
+echo "${INFO} starting bootstrapping..." | tee -a "$LOG"
+printf "\n" | tee -a "$LOG"
+
 execute_script "scripts/yay.sh"
-sleep 1
+printf "\n" | tee -a "$LOG"
+
+execute_script "scripts/ssh.sh"
+printf "\n" | tee -a "$LOG"
+
+execute_script "scripts/ansible.sh"
+printf "\n" | tee -a "$LOG"
+
+# -- finalize -- 
+echo "${OK} bootstrap complete" | tee -a "$LOG"
+printf "\n" | tee -a "$LOG"
+
+while true; do
+    echo -n "${CAT} Would you like to reboot now? (y/n): " | tee -a "$LOG"
+    read -r HYP
+    HYP=$(echo "$HYP" | tr '[:upper]' '[:lower]')    
+
+    if [[ "$HYP" == "y" || "$HYP" == "yes" ]]; then
+        echo "${INFO} Rebooting now..." | tee -a "$LOG"
+        sudo systemctl reboot
+        break
+    elif [[ "$HYP" == "n" || "$HYP" == "no" ]]; then
+        echo "${OK} You chose NOT to reboot." | tee -a "$LOG"
+        break
+    else
+        echo "${WARN} Invalid response. Please answer with 'y' or 'n'." | tee -a "$LOG"
+    fi
+done
+
+printf "\n%.0s" {1..2} | tee -a "$LOG"
+echo "${OK} Script finished." | tee -a "$LOG"
