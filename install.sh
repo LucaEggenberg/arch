@@ -11,9 +11,8 @@ CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
 RESET="$(tput sgr0)"
 
 # -- set log path --
-if [ -d install-logs ]; then
-    mkdir install-logs
-fi
+
+mkdir -p install-logs
 
 LOG="install-logs/00-bootstrap-$(date +%d-%H%M%S).log"
 
