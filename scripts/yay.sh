@@ -27,7 +27,7 @@ else
     echo "${INFO} installing yay..."
     cd /tmp/yay
     makepkg -si --noconfig
-    if [ $? -ne 0 ]
+    if [ $? -ne 0 ]; then
         echo "${ERROR} failed to build and install yay"
         exit 1
     fi

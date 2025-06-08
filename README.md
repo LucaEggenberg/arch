@@ -135,3 +135,19 @@ sudo systemctl enable --now NetworkManager
 ```
 
 ## Getting system ready
+### 1. clone repository
+```bash
+git clone git@github.com:LucaEggenberg/arch.git
+# git clone https://github.com/LucaEggenberg/arch.git once public
+```
+
+### 2. give execution access
+```bash
+cd arch
+chmod +x install.sh
+```
+
+### 3. begin bootstrap
+```bash
+./install.sh
+```

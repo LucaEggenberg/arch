@@ -15,7 +15,7 @@ if [ -d install-logs ]; then
     mkdir install-logs
 fi
 
-LOG="install-logs/00-bootstrap-$(date + %Y-%m-%d_%H-%M-%S).log"
+LOG="install-logs/00-bootstrap-$(date +%d-%H%M%S).log"
 
 # -- function defs --
 execute_script() {
