@@ -29,6 +29,9 @@
       - cliphist           # Clipboard history
       - pavucontrol        # PulseAudio/PipeWire volume control
       - sddm               # login screen
+      - gnome-keyring      # provides gnome-keyring-daemon
+      - libsecret          # library for accessing secret service api (used by gnome-keyrings)
+      - seahorse           # gui to mangage keyrings
       # catpuccin sddm dependencies
       - qt6-svg
       - qt6-declarative
