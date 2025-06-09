@@ -44,7 +44,7 @@
 
 - name: create config directories
   file:
-    path: "/home/{{ target_user }}/{{ item.path }}"
+    path: "/home/{{ target_user }}/.config/{{ item.path }}"
     state: directory
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
@@ -54,7 +54,7 @@
 - name: Render and copy dotfiles
   template:
     src: "{{ item.src }}"
-    dest: "/home/{{ target_user }}/{{ item.path }}"
+    dest: "/home/{{ target_user }}/.config/{{ item.path }}"
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
     mode: '0755'
