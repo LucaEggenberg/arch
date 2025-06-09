@@ -42,13 +42,6 @@
     yay -S --noconfirm light
   become: false
 
-- name: enable and start sddm
-  systemd:
-    name: sddm.service
-    enabled: yes
-    state: started
-  beocme: true
-
 - name: create config directories
   file:
     path: "/home/{{ target_user }}/{{ item.path }}"
@@ -70,7 +63,7 @@
 
 - name: ensure sddm themes directory exists
   file:
-    path: "/usr/share/sddm/themes
+    path: /usr/share/sddm/themes
     state: directory
     mode: '0755'
 
@@ -95,3 +88,9 @@
     owner: root
     group: root
     mode: '0644'
+
+- name: enable and start sddm
+  systemd:
+    name: sddm.service
+    enabled: yes
+    state: stopped
