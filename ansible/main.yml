@@ -29,21 +29,6 @@
         upgrade: yes
         force: yes
         extra_args: "--noconfirm"
-    
-    - name: gather orphaned packages
-      command: pacman -Qtdq
-      register: orphaned_packages
-      changed_when: false
-      failed_when: orphaned_packages.rc != 0 and "no packages were found" not in orphaned_packages.stderr
-      become: true
-
-    - name: remove orphaned packages
-      pacman:
-        name: "{{ orphaned_packages }}"
-        state: absent
-        extra_args: "--noconfirm -Rs"
-      when: orphaned_packages.stdout_lines | length > 0
-      become: true
 
     - name: reboot if needed
       ansible.builtin.reboot:
