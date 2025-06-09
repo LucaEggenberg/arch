@@ -37,7 +37,7 @@
       - unzip
       - kitty
       - linux-headers
-      - meta-utils
+      - mesa-utils
       - htop             # Process viewer
       - ufw              # Firewall
       - networkmanager   # Ensure it's installed (should be from pacstrap)
