@@ -8,7 +8,6 @@
       - waybar             # Status bar
       - wofi               # App launcher
       - swaylock           # Screen locker
-      - grimblast          # For swaylock --screenshots to work
       - grim               # Screenshot tool (captures screen)
       - slurp              # Screenshot tool (selects region)
       - thunar             # File manager
@@ -25,7 +24,6 @@
       - blueman            # Bluetooth manager
       - xorg-xwayland      # Compatibility layer for Xorg applications
       - polkit-kde-agent   # PolicyKit authentication agent (often needed for graphical sudo prompts)
-      - light              # For backlight control
       - pamixer            # For audio control
       - mako               # Notification daemon
       - cliphist           # Clipboard history
@@ -33,20 +31,30 @@
     state: present
     extra_args: "--noconfirm"
 
-- name: Create config directory
+
+- name: install hyprland related yay packages
+  shell: |
+    yay -S --noconfirm grimblast-git
+    yay -S --noconfirm light
+  become: false
+
+- name: create config directories
   file:
-    path: "/home/{{ target_user }}/.config"
+    path: "/home/{{ target_user }}/{{ item.path }}"
     state: directory
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
+  with_filetree: "../templates"
+  when: item.state == "directory"
 
 - name: Render and copy dotfiles
-  ansible.builtin.template:
-    src: ".config/"
-    dest: "/home/{{ target_user }}/.config/"
+  template:
+    src: "{{ item.src }}"
+    dest: "/home/{{ target_user }}/{{ item.path }}"
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
     mode: '0755'
-    recursive: yes
+  with_filetree: "../templates"
+  when: item.state == "file"
 
 
