@@ -1,5 +1,6 @@
 ---
 target_user: "username"
+ansible_user: "{{ target_user }}"
 ssh_port: 22
 
 gpu_packages:
@@ -21,4 +22,3 @@ pacman_packages:
 yay_packages:
   - 1password
   - mailspring
-  

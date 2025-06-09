@@ -174,7 +174,7 @@ chmod +x install.sh
     In `arch/ansible/inventory.ini`, configure `localhost`
     ```ini
     [hosts]
-    localohst ansible_connection=local ansible_user=<target-usr>
+    localohst ansible_connection=local
     ```
 
 2. **Run the Playbook**
@@ -188,7 +188,7 @@ chmod +x install.sh
     In `arch/ansible/inventory.ini`, configure remote host
     ```ini
     [hosts]
-    host_name ansible_host=<ip-addr> ansible_user=<target-usr> ansible_ssh_pass=<passwd>
+    host_name ansible_host=<ip-addr> ansible_ssh_pass=<passwd>
     ```
 
 2. **Run the Playbook**
