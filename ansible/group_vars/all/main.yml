@@ -4,6 +4,7 @@ ssh_port: 22
 
 pacman_packages:
   - neovim
+  - code
   - firefox
   - steam
   - spotify-launcher
