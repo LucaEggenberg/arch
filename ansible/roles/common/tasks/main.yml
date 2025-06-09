@@ -37,7 +37,7 @@
   pacman:
     name: "{{ pacman_packages }}"
     state: present
-  extra_args: "--noconfirm"
+    extra_args: "--noconfirm"
 
 - name: install configured yay packages
   shell: |

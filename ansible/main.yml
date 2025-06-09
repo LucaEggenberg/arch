@@ -1,6 +1,6 @@
 ---
 - name: configure arch
-  hosts: "{{ hosts }}"
+  hosts: hosts
   become: true
   vars:
     desktop_environment: hyprland # future

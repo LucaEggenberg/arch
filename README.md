@@ -173,21 +173,21 @@ chmod +x install.sh
 1. **Configure `inventory.ini`**
     In `arch/ansible/inventory.ini`, configure `localhost`
     ```ini
-    [arch_hosts]
+    [hosts]
     localohst ansible_connection=local ansible_user=<target-usr>
     ```
 
 2. **Run the Playbook**
     From within `arch/ansible` directory:
     ```bash
-    ansible-playboo -i inventory.ini main.yml --ask-become-pass
+    ansible-playbook -i inventory.ini main.yml --ask-become-pass
     ```
 
 ### [remote] I would like to configure another pc
 1. **Configure `inventory.ini`**
     In `arch/ansible/inventory.ini`, configure remote host
     ```ini
-    [arch_hosts]
+    [hosts]
     host_name ansible_host=<ip-addr> ansible_user=<target-usr> ansible_ssh_pass=<passwd>
     ```
 
