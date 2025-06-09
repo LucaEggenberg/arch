@@ -3,16 +3,38 @@
 - name: ensure pacman mirrors are updated
   pacman:
     update_cache: yes
+    upgrade: yes
     extra_args: "--noconfirm"
+
+- name: enable multilib
+  lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^#\[multilib\]'
+    line: '[multilib]'
+    state: present
+    backup: yes
+  become: true
+
+- name: include multilib
+  lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^#Include = /etc/pacman.d/mirrorlist'
+    line: 'Include = /etc/pacman.d/mirrorlist'
+    state: present
+    backup: yes
+  become: true
+
+- name: resync pacman
+  ansible.builtin.pacman:
+    update_cache: yes
+  become: true
 
 - name: install common packages
   pacman:
     name:
       - vim
       - wget
-      - curlCo
       - htop             # Process viewer
-      - neofetch         # System info tool
       - ufw              # Firewall
       - networkmanager   # Ensure it's installed (should be from pacstrap)
       - pipewire         # Modern audio server
