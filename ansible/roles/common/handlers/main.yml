@@ -3,3 +3,8 @@
   systemd:
     name: ufw
     state: restarted
+
+- name: Rebuild initramfs
+  command: mkinitcpio -P
+  changed_when: true
+  become: true

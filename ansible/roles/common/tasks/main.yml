@@ -29,12 +29,6 @@
     update_cache: yes
   become: true
 
-- name: Install NVIDIA GPU drivers
-  pacman:
-    name: "{{ gpu_packages }}"
-    state: present
-  become: true
-
 - name: install common packages
   pacman:
     name:
@@ -42,6 +36,8 @@
       - wget
       - unzip
       - kitty
+      - linux-headers
+      - meta-utils
       - htop             # Process viewer
       - ufw              # Firewall
       - networkmanager   # Ensure it's installed (should be from pacstrap)
@@ -62,6 +58,24 @@
       - base-devel       # Ensures build tools are present (should be from install.sh)
     state: present
     extra_args: "--noconfirm"
+
+- name: install gpu drivers
+  pacman:
+    name: "{{ gpu_packages }}"
+    state: present
+  become: true
+
+- name: blacklist nouveau driver
+  copy:
+    content: | 
+      blacklist nouveau
+      options nouveau modset=0
+    dest: /etc/modprobe.d/blacklist-nouveau.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify: Rebuild initramfs
 
 - name: install configured pacman packages
   pacman:

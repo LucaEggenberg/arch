@@ -32,4 +32,4 @@
 
     - name: reboot if needed
       ansible.builtin.reboot:
-      when: desktop_environment is defined and desktop_environment != 'none'
+      when: desktop_environment is defined and desktop_environment != 'none' and ansible_connection != 'local'
