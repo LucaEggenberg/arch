@@ -2,6 +2,14 @@
 target_user: "username"
 ssh_port: 22
 
+gpu_packages:
+  - nvidia-dkms
+  - nvidia-utils
+  - nvidia-settings
+  - opencl-nvidia
+  - egl-wayland
+  - libva-nvidia-driver
+
 pacman_packages:
   - neovim
   - code
@@ -13,3 +21,4 @@ pacman_packages:
 yay_packages:
   - 1password
   - mailspring
+  

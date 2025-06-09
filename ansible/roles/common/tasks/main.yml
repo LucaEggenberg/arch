@@ -29,6 +29,12 @@
     update_cache: yes
   become: true
 
+- name: Install NVIDIA GPU drivers
+  pacman:
+    name: "{{ gpu_packages }}"
+    state: present
+  become: true
+
 - name: install common packages
   pacman:
     name:
