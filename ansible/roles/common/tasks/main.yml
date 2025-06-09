@@ -30,19 +30,20 @@
       - ttf-font-awesome # For icons in status bars
       - rsync            # For efficient file syncing
       - base-devel       # Ensures build tools are present (should be from install.sh)
-      
-      # programs
-      - firefox
-      - steam
-      - spotify-launcher
     state: present
     extra_args: "--noconfirm"
 
-- name: install common AUR packages
+- name: install configured pacman packages
+  pacman:
+    name: "{{ pacman_packages }}"
+    state: present
+  extra_args: "--noconfirm"
+
+- name: install configured yay packages
   shell: |
-    yay -S --noconfirm 1password 
-    yay -S --noconfirm mailspring
+    yay -S --noconfirm {{ item }}
   become: false
+  loop: "{{ yay_packages }}"
 
 - name: enable and start networkmanager service
   systemd:

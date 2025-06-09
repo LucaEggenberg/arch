@@ -156,5 +156,43 @@ chmod +x install.sh
 ./install.sh
 ```
 
- ## Configure System
- 
+## Configure System
+
+**Review the variables**
+* `arch/ansible/group_vars/all/main.yml`:
+    * `target_user`: **Crucial.** Set this to your non-root username
+    * `ssh_port`: If SSH is not on port 22.
+    * `pacman_packages`: Additional programs installed with pacman
+    * `yay_packages`: Additional programs installed with yay
+* `arch/ansible/roles/hyprland/vars/main.yml`:
+    * `hyprland_kb_layout`: Keyboard layout
+    * `hyprland_kb_variant`: Keyboard variant
+
+### [localhost] I would like to configure the computer I cloned this repository on 
+--- 
+1. **Configure `inventory.ini`**
+    In `arch/ansible/inventory.ini`, configure `localhost`
+    ```ini
+    [arch_hosts]
+    localohst ansible_connection=local ansible_user=<target-usr>
+    ```
+
+2. **Run the Playbook**
+    From within `arch/ansible` directory:
+    ```bash
+    ansible-playboo -i inventory.ini main.yml --ask-become-pass
+    ```
+
+### [remote] I would like to configure another pc
+1. **Configure `inventory.ini`**
+    In `arch/ansible/inventory.ini`, configure remote host
+    ```ini
+    [arch_hosts]
+    host_name ansible_host=<ip-addr> ansible_user=<target-usr> ansible_ssh_pass=<passwd>
+    ```
+
+2. **Run the Playbook**
+    From within `arch/ansible` directory:
+    ```bash
+    ansible-playbook -i inventory.ini main.yml --ask-become-pass
+    ```

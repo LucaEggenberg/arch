@@ -1,0 +1,13 @@
+---
+target_user: "username"
+ssh_port: 22
+
+pacman_packages:
+  - neovim
+  - firefox
+  - steam
+  - spotify-launcher
+
+yay_packages:
+  - 1password
+  - mailspring
