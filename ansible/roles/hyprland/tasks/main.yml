@@ -8,6 +8,7 @@
       - waybar             # Status bar
       - wofi               # App launcher
       - swaylock           # Screen locker
+      - grimblast          # For swaylock --screenshots to work
       - grim               # Screenshot tool (captures screen)
       - slurp              # Screenshot tool (selects region)
       - thunar             # File manager
