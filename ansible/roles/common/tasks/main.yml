@@ -10,7 +10,7 @@
     name:
       - vim
       - wget
-      - curl
+      - curlCo
       - htop             # Process viewer
       - neofetch         # System info tool
       - ufw              # Firewall
@@ -30,8 +30,19 @@
       - ttf-font-awesome # For icons in status bars
       - rsync            # For efficient file syncing
       - base-devel       # Ensures build tools are present (should be from install.sh)
+      
+      # programs
+      - firefox
+      - steam
+      - spotify-launcher
     state: present
     extra_args: "--noconfirm"
+
+- name: install common AUR packages
+  shell: |
+    yay -S --noconfirm 1password 
+    yay -S --noconfirm mailspring
+  become: false
 
 - name: enable and start networkmanager service
   systemd:

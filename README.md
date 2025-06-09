@@ -135,6 +135,10 @@ sudo systemctl enable --now NetworkManager
 ```
 
 ## Getting system ready
+This repository assumes Arch to be installed and connected to the internet (as per the instructions above).
+
+The `install.sh` script will ensure all dependencies are installed and prepare the system for provisioning of my personal configuration.
+
 ### 1. clone repository
 ```bash
 git clone git@github.com:LucaEggenberg/arch.git
@@ -151,3 +155,6 @@ chmod +x install.sh
 ```bash
 ./install.sh
 ```
+
+ ## Configure System
+ 
