@@ -32,28 +32,20 @@
     state: present
     extra_args: "--noconfirm"
 
-- name: create user directories
+- name: Create config directory
   file:
-    path: "/home/{{ target_user }}/.config/{{ item }}"
+    path: "/home/{{ target_user }}/.config"
     state: directory
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
-    mode: '0755'
-  loop:
-    - hypr
-    - waybar
-    - wofi
-    - swaylock
-    - mako
-    - helix
 
-- name: Copy dotfiles
-  copy:
+- name: Render and copy dotfiles
+  ansible.builtin.template:
     src: ".config/"
     dest: "/home/{{ target_user }}/.config/"
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
-    mode: '0644'
+    mode: '0755'
     recursive: yes
 
 
