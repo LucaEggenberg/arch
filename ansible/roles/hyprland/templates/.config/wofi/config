@@ -1,0 +1,14 @@
+# =======================
+# General options
+# =======================
+
+# Sorting behavior
+sort=true                # Sort results alphabetically
+insensitive=true         # Case-insensitive search
+location=0               # Position on screen (0 = center, 1-9 for numpad positions)
+hide_scroll=true         # Hide the scrollbar if all items fit
+
+# Result limit
+allow_images=true        # Allow displaying icons (e.g., application icons)
+line_wrap=false          # Don't wrap text within a line
+lines=8                  # Number of visible lines (results) at once
