@@ -1,65 +1,79 @@
 window {
-    /* General window appearance */
-    background-color: rgba(30, 30, 46, 0.9); /* Dark background with transparency (Nord-like) */
-    border: 1px solid #88c0d0;             /* Thin border with accent color */
-    border-radius: 12px;                   /* More rounded corners for the popup */
-    padding: 10px;                         /* Padding inside the window */
-    font-family: "Hack Nerd Font", "Font Awesome 6 Free", sans-serif; /* Consistent font */
-    font-size: 14px;                       /* Slightly larger font than Waybar for readability */
-}
-
-#input {
-    /* Input field styling (where you type your search query) */
-    margin-bottom: 10px;                   /* Space below the input field */
-    padding: 8px 12px;                     /* Padding inside the input field */
-    border: 1px solid #4c566a;             /* Subtle border */
-    border-radius: 8px;                    /* Rounded input field */
-    background-color: #3b4252;             /* Slightly lighter dark background */
-    color: #d8dee9;                        /* Text color */
-}
-
-#inner-box {
-    /* Container for the scrollable list of results */
-    margin: 0px;
-    padding: 0px;
+  font-family: "SF Pro Display";
+  font-weight: normal;
+  font-size: 16px;
+  border: 1px solid #313244;
+  background-color: transparent;
+  border-radius: 12px;
 }
 
 #outer-box {
-    /* Outer container for the window */
-    margin: 0px;
-    padding: 0px;
+  border: 1px solid #313244;
+  border-radius: 12px;
+  background-color: #11111b;
+}
+
+#input {
+  padding: 12px 24px;
+  color: #cdd6f4;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #313244;
+  outline: none;
+  box-shadow: none;
+  font-weight: bold;
+  background-color: #11111b;
+  outline: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+#inner-box {
+  margin: 8px;
+  color: #cdd6f4;
+  font-weight: bold;
+  background-color: #11111b;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 #scroll {
-    /* Scrollable area for results */
-    margin: 0px;
-    padding: 0px;
-}
-
-#text {
-    /* Styling for the text within the results */
-    margin: 0px 5px;
-    padding: 0px;
-}
-
-#entry {
-    /* Individual result entry styling */
-    padding: 6px 10px;                     /* Padding around each result */
-    margin: 2px 0px;                       /* Small vertical margin between results */
-    border-radius: 6px;                    /* Rounded corners for each result */
-}
-
-#entry:selected {
-    /* Styling for the currently selected (highlighted) result */
-    background-color: #81a1c1;             /* Accent color (Nord blue) */
-    color: #2e3440;                        /* Dark text on accent background */
-    outline: none;                         /* Remove default outline */
+  border: none;
+  border-radius: 0px;
 }
 
 #img {
-    /* Styling for application icons */
-    margin-right: 8px;                     /* Space between icon and text */
-    /* If icons are too big or too small, adjust here */
-    min-height: 24px;
-    min-width: 24px;
+  margin-right: 6px;
+  object-fit: contain;
+}
+
+#img:selected {
+  outline: none;
+  box-shadow: none;
+}
+
+#text:selected {
+  outline: none;
+  box-shadow: none;
+  color: #cdd6f4;
+  border: none;
+  border-radius: 0px;
+  background-color: #1e1e2e;
+}
+
+#entry {
+  padding: 12px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+#entry:selected {
+  border-radius: 6px;
+  background-color: #1e1e2e;
 }

@@ -2,13 +2,24 @@
 # General options
 # =======================
 
-# Sorting behavior
-sort=true                # Sort results alphabetically
-insensitive=true         # Case-insensitive search
-location=0               # Position on screen (0 = center, 1-9 for numpad positions)
-hide_scroll=true         # Hide the scrollbar if all items fit
+# styling
+width=600
+height=400
+location=center
+image_size=24
 
-# Result limit
-allow_images=true        # Allow displaying icons (e.g., application icons)
-line_wrap=false          # Don't wrap text within a line
-lines=8                  # Number of visible lines (results) at once
+orientation=vertical
+halign=fill
+content_halign=fill
+
+prompt=Search...
+allow_images=true
+gtk_dark=true
+
+# behaviour
+show=drun
+filter_rate=100
+insensitive=true
+allow_markup=true
+no_actions=true
+dynamic_lines=true
