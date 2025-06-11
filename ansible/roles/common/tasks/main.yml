@@ -9,17 +9,9 @@
 - name: enable multilib
   lineinfile:
     path: /etc/pacman.conf
-    regexp: '^#\[multilib\]'
-    line: '[multilib]'
-    state: present
-    backup: yes
-  become: true
-
-- name: include multilib
-  lineinfile:
-    path: /etc/pacman.conf
-    regexp: '^#Include = /etc/pacman.d/mirrorlist'
-    line: 'Include = /etc/pacman.d/mirrorlist'
+    block: | 
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
     state: present
     backup: yes
   become: true
