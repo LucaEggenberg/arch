@@ -36,6 +36,9 @@
       - qt6-svg
       - qt6-declarative
       - qt5-quickcontrols2
+      # fonts for waybar
+      - ttf-font-awesome
+      - nerd-fonts
     state: present
     extra_args: "--noconfirm"
 
