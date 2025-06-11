@@ -15,10 +15,8 @@ pacman_packages:
   - neovim
   - code
   - firefox
-  - steam
   - spotify-launcher
-  - discord
+  - thunderbird
 
 yay_packages:
   - 1password
-  - mailspring
