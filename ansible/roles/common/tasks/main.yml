@@ -7,7 +7,7 @@
     extra_args: "--noconfirm"
 
 - name: enable multilib
-  lineinfile:
+  blockinfile:
     path: /etc/pacman.conf
     block: | 
       [multilib]
