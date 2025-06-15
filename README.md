@@ -24,7 +24,8 @@ timedatectl
 | swap  | Linux filesystem | remainder |
 
 ```bash
-cfdisk
+# fdisk -l to view drives
+cfdisk # /dev/<boot_drive> if more than 1
 ``` 
 
 ### 4. format partition
@@ -141,8 +142,7 @@ The `install.sh` script will ensure all dependencies are installed and prepare t
 
 ### 1. clone repository
 ```bash
-git clone git@github.com:LucaEggenberg/arch.git
-# git clone https://github.com/LucaEggenberg/arch.git once public
+git clone https://github.com/LucaEggenberg/arch.git
 ```
 
 ### 2. give execution access
