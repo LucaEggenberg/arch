@@ -21,7 +21,7 @@ timedatectl
 | -------- | ------- | ------- |
 | boot  | EFI System | 1G |
 | swap  | Linux swap | 4G-8G |
-| swap  | Linux filesystem | remainder |
+| root  | Linux filesystem | remainder |
 
 ```bash
 # fdisk -l to view drives
