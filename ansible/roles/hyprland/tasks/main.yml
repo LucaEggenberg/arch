@@ -46,6 +46,7 @@
   shell: |
     yay -S --noconfirm grimblast-git
     yay -S --noconfirm light
+    yay -S --noconfirm wlogout
   become: false
 
 - name: create config directories

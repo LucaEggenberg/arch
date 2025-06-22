@@ -1,37 +1,158 @@
-@import url("./colors.css");
+@import "colors.css";
+
 * {
     border: none;
     border-radius: 0;
-    font-family: Iosevka;
-    font-size: 11pt;
     min-height: 0;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13px;
 }
+
 window#waybar {
-    opacity: 0.9;
-    background: @background-darker;
-    color: @foreground;
-    border-bottom: 2px solid @background;
+    background-color: alpha(@crust, 0.6);
+    border-radius: 15px; /* Rounded corners for the entire bar */
+    transition-property: background-color;
+    transition-duration: 0.5s;
 }
+
+window#waybar.hidden {
+    opacity: 0.5;
+}
+
+#workspaces {
+    background-color: transparent;
+    margin-left: 5px;
+}
+
 #workspaces button {
-    padding: 0 10px;
-    background: @background;
-    color: @foreground;
+    all: initial;
+    min-width: 0;
+    padding: 6px 12px;
+    margin: 0px 2px;
+    color: @subtext0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
 }
-#workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-    background-image: linear-gradient(0deg, @selection, @background-darker);
-}
+
 #workspaces button.active {
-    background-image: linear-gradient(0deg, @purple, @selection);
+    color: @lavender;
+    border-bottom: 2px solid @lavender;
+    background-color: transparent;
 }
+
+#workspaces button:hover {
+    color: @text;
+    background-color: @surface0;
+    border-bottom: 2px solid @text;
+}
+
 #workspaces button.urgent {
-    background-image: linear-gradient(0deg, @red, @background-darker);
+    color: @red;
+    border-bottom: 2px solid @red;
+    animation: flash 1s cubic-bezier(.5, 0, 1, 1) infinite;
 }
-#taskbar button.active {
-    background-image: linear-gradient(0deg, @selection, @background-darker);
+
+@keyframes flash {
+    from {
+        background-color: @base;
+    }
+    50% {
+        background-color: @red;
+    }
+    to {
+        background-color: @base;
+    }
 }
+
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#clock,
+#custom-power {
+    border-radius: 4px;
+    margin: 4px 4px;
+    padding: 6px 10px;
+    background-color: transparent;
+    color: @text;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#custom-power {
+    margin-right: 4px;
+}
+
+#custom-logo {
+    padding: 6px 10px;
+    margin-left: 5px;
+    font-size: 15px;
+    border-radius: 4px;
+    color: @sapphire;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#custom-logo:hover {
+    background-color: @surface0;
+}
+
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#clock:hover,
+#custom-power:hover {
+    background-color: @surface0;
+}
+
+#cpu { color: @rosewater; }
+#memory { color: @peach; }
+
+#temperature {
+    color: @teal;
+}
+#temperature.critical {
+    color: @red;
+    animation: flash_red 1s cubic-bezier(.5, 0, 1, 1) infinite;
+}
+@keyframes flash_red {
+    from {
+        background-color: transparent;
+    }
+    50% {
+        background-color: @red;
+        color: @crust;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+#pulseaudio {
+    color: @green;
+}
+#pulseaudio.muted {
+    color: @subtext0;
+}
+
 #clock {
-    padding: 0 4px;
-    background: @background;
+    color: @mauve;
+}
+
+#custom-power {
+    color: @red;
+}
+
+tooltip {
+    border-radius: 8px;
+    padding: 15px;
+    background-color: @crust;
+    color: @text;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+tooltip label {
+    padding: 5px;
+    background-color: @crust;
+    color: @text;
 }
