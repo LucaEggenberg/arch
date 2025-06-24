@@ -7,7 +7,6 @@
       - hyprland           # Wayland compositor
       - waybar             # Status bar
       - wofi               # App launcher
-      - swaylock           # Screen locker
       - grim               # Screenshot tool (captures screen)
       - slurp              # Screenshot tool (selects region)
       - thunar             # File manager
@@ -15,15 +14,9 @@
       - qt5-wayland        # Qt5 Wayland support
       - qt6-wayland        # Qt6 Wayland support
       - xdg-desktop-portal-hyprland # Portal for Hyprland (needed by apps)
-      - rofi               # Rofi theme selector (alternative to wofi for some)
-      - mpv                # Media player (often used for screenshots/recording previews)
-      - firefox            # Brave is mentioned, but Firefox is a solid default
-      - discord            # From screenshot
-      - spotify-launcher   # From screenshot (often needs AUR)
-      - telegram-desktop   # From screenshot
+      - mpv                # Media player
       - blueman            # Bluetooth manager
       - xorg-xwayland      # Compatibility layer for Xorg applications
-      - polkit-kde-agent   # PolicyKit authentication agent (often needed for graphical sudo prompts)
       - pamixer            # For audio control
       - mako               # Notification daemon
       - cliphist           # Clipboard history
@@ -36,9 +29,6 @@
       - qt6-svg
       - qt6-declarative
       - qt5-quickcontrols2
-      # fonts for waybar
-      - ttf-font-awesome
-      - nerd-fonts
     state: present
     extra_args: "--noconfirm"
 
@@ -47,6 +37,7 @@
     yay -S --noconfirm grimblast-git
     yay -S --noconfirm light
     yay -S --noconfirm wlogout
+    yay -S --noconfirm swww
   become: false
 
 - name: create config directories

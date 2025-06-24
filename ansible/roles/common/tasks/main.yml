@@ -33,7 +33,7 @@
       - htop             # Process viewer
       - ufw              # Firewall
       - networkmanager   # Ensure it's installed (should be from pacstrap)
-      - pipewire         # Modern audio server
+      - pipewire         # audio server
       - wireplumber      # Session manager for PipeWire
       - pipewire-alsa    # ALSA compatibility
       - pipewire-pulse   # PulseAudio compatibility
@@ -46,6 +46,7 @@
       - ttf-dejavu       # Common font
       - ttf-liberation   # Common font
       - ttf-font-awesome # For icons in status bars
+      - nerd-fonts       
       - rsync            # For efficient file syncing
       - base-devel       # Ensures build tools are present (should be from install.sh)
     state: present
