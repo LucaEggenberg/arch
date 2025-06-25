@@ -24,35 +24,55 @@
 - name: install common packages
   pacman:
     name:
+      # util
       - vim
       - wget
       - unzip
       - make
+      - htop
+      - ufw
+      - networkmanager
+      - xdg-utils
+      - rsync
+      - base-devel
       - linux-headers
       - mesa-utils
-      - htop             # Process viewer
-      - ufw              # Firewall
-      - networkmanager   # Ensure it's installed (should be from pacstrap)
-      - pipewire         # audio server
-      - wireplumber      # Session manager for PipeWire
-      - pipewire-alsa    # ALSA compatibility
-      - pipewire-pulse   # PulseAudio compatibility
-      - pipewire-jack    # JACK compatibility
-      - xdg-utils        # Essential for opening links/files
-      - bluez            # Bluetooth stack
-      - bluez-utils      # Bluetooth utilities
-      - sddm             # Display manager
-      - noto-fonts       # General font support
-      - ttf-dejavu       # Common font
-      - ttf-liberation   # Common font
-      - ttf-font-awesome # For icons in status bars
-      - nerd-fonts       
-      - rsync            # For efficient file syncing
-      - base-devel       # Ensures build tools are present (should be from install.sh)
+
+      # audio
+      - pipewire
+      - wireplumber
+      - pipewire-alsa
+      - pipewire-pulse
+      - pipewire-jack
+      - pavucontrol
+
+      # bluetooth
+      - bluez
+      - bluez-utils
+      - blueman
+      
+      # fonts
+      - noto-fonts
+      - ttf-dejavu
+      - ttf-liberation
+      - ttf-font-awesome
+      - nerd-fonts
+
+      # display manager
       - sddm
       - qt6-svg
       - qt6-declarative
       - qt5-quickcontrols2
+      
+      # apps
+      - kitty
+      - thunar
+      - eog
+      - evince
+      - gnome-calculator
+      - btop
+      - mpv
+      - file-roller
     state: present
     extra_args: "--noconfirm"
 

@@ -4,27 +4,20 @@
 - name: install hyprland related packages
   pacman:
     name:
-      - kitty
-      - hyprland           # Wayland compositor
-      - waybar             # Status bar
-      - wofi               # App launcher
-      - grim               # Screenshot tool (captures screen)
-      - slurp              # Screenshot tool (selects region)
-      - thunar             # File manager
-      - btop               # Resource monitor
-      - qt5-wayland        # Qt5 Wayland support
-      - qt6-wayland        # Qt6 Wayland support
-      - xdg-desktop-portal-hyprland # Portal for Hyprland (needed by apps)
-      - mpv                # Media player
-      - blueman            # Bluetooth manager
-      - xorg-xwayland      # Compatibility layer for Xorg applications
-      - pamixer            # For audio control
-      - mako               # Notification daemon
-      - cliphist           # Clipboard history
-      - pavucontrol        # PulseAudio/PipeWire volume control
-      - gnome-keyring      # provides gnome-keyring-daemon
-      - libsecret          # library for accessing secret service api (used by gnome-keyrings)
-      - seahorse           # gui to mangage keyrings
+      - hyprland
+      - waybar
+      - wofi
+      - grim
+      - slurp
+      - qt5-wayland
+      - qt6-wayland
+      - xdg-desktop-portal-hyprland
+      - xorg-xwayland
+      - mako
+      - cliphist
+      - gnome-keyring
+      - libsecret
+      - seahorse
     state: present
     extra_args: "--noconfirm"
 
