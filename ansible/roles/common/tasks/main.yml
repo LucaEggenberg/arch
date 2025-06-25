@@ -27,7 +27,6 @@
       - vim
       - wget
       - unzip
-      - kitty
       - make
       - linux-headers
       - mesa-utils

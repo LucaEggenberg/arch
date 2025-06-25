@@ -4,6 +4,7 @@
 - name: install hyprland related packages
   pacman:
     name:
+      - kitty
       - hyprland           # Wayland compositor
       - waybar             # Status bar
       - wofi               # App launcher
