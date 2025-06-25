@@ -5,6 +5,7 @@
   pacman:
     name:
       - hyprland
+      - hyprcursor
       - waybar
       - wofi
       - grim
@@ -29,6 +30,7 @@
     yay -S --noconfirm light
     yay -S --noconfirm wlogout
     yay -S --noconfirm swww
+    yay -S --noconfirm catppuccin-cursors-frappe
   become: false
 
 - name: create config directories
