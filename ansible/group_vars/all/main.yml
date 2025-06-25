@@ -12,11 +12,14 @@ gpu_packages:
   - libva-nvidia-driver
 
 pacman_packages:
-  - neovim
   - code
   - firefox
   - spotify-launcher
   - thunderbird
+  - neovim
+  - gcc
+  - ripgrep
+  - fd
 
 yay_packages:
   - 1password

@@ -28,6 +28,7 @@
       - wget
       - unzip
       - kitty
+      - make
       - linux-headers
       - mesa-utils
       - htop             # Process viewer
