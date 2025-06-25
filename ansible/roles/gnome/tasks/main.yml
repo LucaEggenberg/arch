@@ -4,10 +4,10 @@
 - name: install gnome packages
   pacman:
     name:
-      - gnome
+      - gnome-shell
+      - gdm
       - gnome-tweaks
       - gnome-shell-extensions
-      - gdm
       - dconf-editor
       - xdg-desktop-portal-gnome
       - gnome-disk-utility
@@ -16,7 +16,19 @@
       - seahorse
     state: present
     extra_args: "--noconfirm"
-    
+  become: true
+
+- name: remove unwanted session files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  become: true
+  loop:
+    - "/usr/share/xsessions/gnome-classic.desktop"
+    - "/usr/share/xsessions/gnome-xorg.desktop"
+    - "/usr/share/xsessions/gnome.desktop"
+    - "/usr/share/wayland-sessions/gnome-classic.desktop"
+
 - name: create config directories
   file:
     path: "/home/{{ ansible_user }}/.config/{{ item.path }}"
