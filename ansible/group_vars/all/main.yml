@@ -1,15 +1,11 @@
 ---
-target_user: "username"
-ansible_user: "{{ target_user }}"
+ansible_user: "username"
 ssh_port: 22
 
-gpu_packages:
-  - nvidia-dkms
-  - nvidia-utils
-  - nvidia-settings
-  - opencl-nvidia
-  - egl-wayland
-  - libva-nvidia-driver
+desktop_enivronments:
+  - hyprland
+  # - gnome
+  # - kde
 
 pacman_packages:
   - code
@@ -23,3 +19,11 @@ pacman_packages:
 
 yay_packages:
   - 1password
+
+gpu_packages:
+  - nvidia-dkms
+  - nvidia-utils
+  - nvidia-settings
+  - opencl-nvidia
+  - egl-wayland
+  - libva-nvidia-driver

@@ -160,7 +160,7 @@ chmod +x install.sh
 
 **Review the variables**
 * `arch/ansible/group_vars/all/main.yml`:
-    * `target_user`: **Crucial.** Set this to your non-root username
+    * `ansible_user`: **Crucial.** Set this to your non-root username
     * `ssh_port`: If SSH is not on port 22.
     * `pacman_packages`: Additional programs installed with pacman
     * `yay_packages`: Additional programs installed with yay

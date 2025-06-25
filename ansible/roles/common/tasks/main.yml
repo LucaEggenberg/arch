@@ -134,19 +134,19 @@
 
 - name: create config directories
   file:
-    path: "/home/{{ target_user }}/.config/{{ item.path }}"
+    path: "/home/{{ ansible_user }}/.config/{{ item.path }}"
     state: directory
-    owner: "{{ target_user }}"
-    group: "{{ target_user }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
   with_filetree: "../templates/.config"
   when: item.state == "directory"
 
 - name: Render and copy dotfiles
   template:
     src: "{{ item.src }}"
-    dest: "/home/{{ target_user }}/.config/{{ item.path }}"
-    owner: "{{ target_user }}"
-    group: "{{ target_user }}"
+    dest: "/home/{{ ansible_user }}/.config/{{ item.path }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: '0755'
   with_filetree: "../templates/.config"
   when: item.state == "file"

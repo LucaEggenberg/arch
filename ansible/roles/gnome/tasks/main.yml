@@ -1,34 +1,22 @@
 ---
-# hyprland setup
+# gnome setup
 
-- name: install hyprland related packages
+- name: install gnome packages
   pacman:
     name:
-      - hyprland
-      - waybar
-      - wofi
-      - grim
-      - slurp
-      - qt5-wayland
-      - qt6-wayland
-      - xdg-desktop-portal-hyprland
-      - xorg-xwayland
-      - mako
-      - cliphist
+      - gnome
+      - gnome-tweaks
+      - gnome-shell-extensions
+      - gdm
+      - dconf-editor
+      - xdg-desktop-portal-gnome
+      - gnome-disk-utility
       - gnome-keyring
       - libsecret
       - seahorse
     state: present
     extra_args: "--noconfirm"
-
-- name: install hyprland related yay packages
-  shell: |
-    yay -S --noconfirm grimblast-git
-    yay -S --noconfirm light
-    yay -S --noconfirm wlogout
-    yay -S --noconfirm swww
-  become: false
-
+    
 - name: create config directories
   file:
     path: "/home/{{ ansible_user }}/.config/{{ item.path }}"
@@ -47,3 +35,19 @@
     mode: '0755'
   with_filetree: "../templates/.config"
   when: item.state == "file"
+
+- name: disable and stop gdm service
+  systemd:
+    name: gdm.service
+    enabled: no
+    state: stopped
+    masked: yes # don't accidentally enable
+  become: true
+
+- name: set dark modea
+  dconf:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
+    state: present
+    scope: user
+  become: false
