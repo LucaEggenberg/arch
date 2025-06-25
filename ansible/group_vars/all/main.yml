@@ -7,6 +7,9 @@ desktop_enivronments:
   # - gnome
   # - kde
 
+kb_layout: "ch"
+kb_variant: ""
+
 pacman_packages:
   - code
   - firefox

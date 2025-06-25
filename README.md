@@ -164,9 +164,8 @@ chmod +x install.sh
     * `ssh_port`: If SSH is not on port 22.
     * `pacman_packages`: Additional programs installed with pacman
     * `yay_packages`: Additional programs installed with yay
-* `arch/ansible/roles/hyprland/vars/main.yml`:
-    * `hyprland_kb_layout`: Keyboard layout
-    * `hyprland_kb_variant`: Keyboard variant
+    * `kb_layout`: Keyboard layout
+    * `kb_variant`: Keyboard variant
 
 ### [localhost] I would like to configure the computer I cloned this repository on 
 --- 
