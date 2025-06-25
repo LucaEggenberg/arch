@@ -49,6 +49,10 @@
       - nerd-fonts       
       - rsync            # For efficient file syncing
       - base-devel       # Ensures build tools are present (should be from install.sh)
+      - sddm
+      - qt6-svg
+      - qt6-declarative
+      - qt5-quickcontrols2
     state: present
     extra_args: "--noconfirm"
 
@@ -126,3 +130,37 @@
     mode: '0755'
   with_filetree: "../templates/.config"
   when: item.state == "file"
+
+- name: ensure sddm themes directory exists
+  file:
+    path: /usr/share/sddm/themes
+    state: directory
+    mode: '0755'
+
+- name: download catpuccin sddm theme
+  get_url: 
+    url: https://github.com/catppuccin/sddm/releases/download/v1.0.0/catppuccin-frappe.zip
+    dest: "/tmp/catpuccin-frappe.zip"
+    mode: '0644'
+  become: true
+
+- name: unzip theme to themes directory
+  unarchive:
+    src: /tmp/catpuccin-frappe.zip
+    dest: /usr/share/sddm/themes/
+    remote_src: yes
+    creates: /usr/share/sddm/themes/catpuccin-frappe
+
+- name: create sddm config
+  template:
+    src: sddm.conf
+    dest: /etc/sddm.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: enable and start sddm
+  systemd:
+    name: sddm.service
+    enabled: yes
+    state: stopped
