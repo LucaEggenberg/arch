@@ -18,16 +18,19 @@
     extra_args: "--noconfirm"
   become: true
 
+# only keep wayland-sessions/gnome-wayland.desktop
 - name: remove unwanted session files
   ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   become: true
   loop:
-    - "/usr/share/xsessions/gnome-classic.desktop"
-    - "/usr/share/xsessions/gnome-xorg.desktop"
     - "/usr/share/xsessions/gnome.desktop"
+    - "/usr/share/xsessions/gnome-xorg.desktop"
+    - "/usr/share/xsessions/gnome-classic.desktop"
+    - "/usr/share/wayland-sessions/gnome.desktop"
     - "/usr/share/wayland-sessions/gnome-classic.desktop"
+    - "/usr/share/wayland-sessions/gnome-classic-wayland.desktop"
 
 - name: create config directories
   file:
