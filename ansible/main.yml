@@ -9,7 +9,7 @@
         name: "{{ ansible_user }}"
         groups: "wheel,audio,video,input,storage"
         append: yes
-      when: desktop_environment is defined
+      when: desktop_environments is defined
     
   roles:
     - role: common

@@ -2,7 +2,7 @@
 ansible_user: "username"
 ssh_port: 22
 
-desktop_enivronments:
+desktop_environments:
   - hyprland
   # - gnome
   # - kde
