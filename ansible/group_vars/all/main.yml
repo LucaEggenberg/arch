@@ -15,6 +15,8 @@ pacman_packages:
   - firefox
   - spotify-launcher
   - thunderbird
+  - discord
+  - steam
   - neovim
   - gcc
   - ripgrep
