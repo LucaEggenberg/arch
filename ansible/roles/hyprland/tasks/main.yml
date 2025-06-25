@@ -19,7 +19,7 @@
       - gnome-keyring
       - libsecret
       - seahorse
-      - dolphin
+      - yazi
     state: present
     extra_args: "--noconfirm"
 
