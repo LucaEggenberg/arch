@@ -66,10 +66,8 @@
       
       # apps
       - kitty
-      - thunar
       - eog
       - evince
-      - gnome-calculator
       - btop
       - mpv
       - file-roller

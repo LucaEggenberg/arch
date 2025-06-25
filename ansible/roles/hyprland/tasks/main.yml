@@ -19,6 +19,7 @@
       - gnome-keyring
       - libsecret
       - seahorse
+      - dolphin
     state: present
     extra_args: "--noconfirm"
 
