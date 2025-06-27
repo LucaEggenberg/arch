@@ -45,6 +45,7 @@
       - pipewire-pulse
       - pipewire-jack
       - pavucontrol
+      - pamixer
 
       # bluetooth
       - bluez
