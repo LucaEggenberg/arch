@@ -1,0 +1,42 @@
+---
+# kde setup
+
+- name: install kde packages
+  pacman:
+    name:
+      - plasma-desktop
+      - plasma-wayland-session
+      - kde-applications-meta
+      - xdg-desktop-portal-kde
+      - kwin
+      - powerdevil
+      - discover
+      - packagekit-qt5
+      - bluez-qt
+      - milou
+      - plasma-nm
+      - noto-fonts-emoji
+      - kde-gtk-config
+      - phonon-qt5-gstreamer
+    state: present
+    extra_args: "--noconfirm"
+  become: true
+
+- name: create config directories
+  file:
+    path: "/home/{{ ansible_user }}/.config/{{ item.path }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  with_filetree: "../templates/.config"
+  when: item.state == "directory"
+
+- name: Render and copy dotfiles
+  template:
+    src: "{{ item.src }}"
+    dest: "/home/{{ ansible_user }}/.config/{{ item.path }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  with_filetree: "../templates/.config"
+  when: item.state == "file"

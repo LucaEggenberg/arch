@@ -4,8 +4,8 @@ ssh_port: 22
 
 desktop_environments:
   - hyprland
-  # - gnome
-  # - kde
+  - gnome
+  - kde
 
 kb_layout: "ch"
 kb_variant: ""

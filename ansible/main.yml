@@ -17,8 +17,8 @@
       when: "'hyprland' in desktop_environments"
     - role: gnome
       when: "'gnome' in desktop_environments"
-    # - role: kde
-    #   when: "'kde' in desktop_environments"
+    - role: kde
+      when: "'kde' in desktop_environments"
 
   post_tasks:
     - name: update & cleanup
