@@ -1,0 +1,5 @@
+[Layout]
+DisplayNames=,
+LayoutList={{ kb_layout }}
+Use=true
+VariantList={{ kb_variant }}
