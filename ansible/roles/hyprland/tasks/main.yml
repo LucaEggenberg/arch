@@ -51,3 +51,11 @@
     mode: '0755'
   with_filetree: "../templates/.config"
   when: item.state == "file"
+
+- name: remove unwanted session files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  become: true
+  loop:
+    - "/usr/share/wayland-sessions/hyprland-uwsm.desktop"
