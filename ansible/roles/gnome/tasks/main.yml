@@ -60,10 +60,9 @@
     masked: yes # don't accidentally enable
   become: true
 
-- name: set dark modea
+- name: set dark mode
   dconf:
     key: "/org/gnome/desktop/interface/color-scheme"
     value: "'prefer-dark'"
     state: present
-    scope: user
   become: false
