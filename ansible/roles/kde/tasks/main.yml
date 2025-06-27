@@ -4,20 +4,10 @@
 - name: install kde packages
   pacman:
     name:
-      - plasma-desktop
-      - plasma-wayland-session
-      - kde-applications-meta
-      - xdg-desktop-portal-kde
-      - kwin
-      - powerdevil
-      - discover
-      - packagekit-qt5
-      - bluez-qt
-      - milou
-      - plasma-nm
-      - noto-fonts-emoji
-      - kde-gtk-config
-      - phonon-qt5-gstreamer
+      - plasma-meta
+      - kde-utilities-meta
+      - kde-system-meta
+      - kde-network-meta
     state: present
     extra_args: "--noconfirm"
   become: true
