@@ -1,4 +1,6 @@
-Playbook for setting up Arch to my liking.
+# Arch.git
+
+Because I like regularly nuking my entire System, an (almost) fully automated install of arch (btw).
 
 # Usage
 
@@ -11,7 +13,7 @@ https://wiki.archlinux.org/title/Installation_guide
 loadkeys de_CH-latin1
 ```
 
-### 2. update clock 
+### 2. ensure system clock is synchronized
 ```bash 
 timedatectl 
 ```
@@ -58,11 +60,11 @@ swapon  /dev/swap_partition
 
 ### 6. install essentials 
 ```bash
-pacstrap /mnt base linux linux-firmware grub efibootmgr networkmanager git vi nano sudo python
+pacstrap /mnt base linux linux-firmware grub efibootmgr networkmanager git vi sudo python
 ```
 
 ### 7. base configuration
-Fstab:
+Generate Fstab:
 ```bash
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
@@ -73,9 +75,10 @@ arch-chroot /mnt
 ```
 Set timezone:
 ```bash
+# /usr/share/zoneinfo/Region/City
 ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 ```
-Sync clock: 
+Sync clock:
 ```bash
 hwclock --systohc
 ```
@@ -138,14 +141,14 @@ sudo systemctl enable --now NetworkManager
 ## Getting system ready
 This repository assumes Arch to be installed and connected to the internet (as per the instructions above).
 
-The `install.sh` script will ensure all dependencies are installed and prepare the system for provisioning of my personal configuration.
+The `install.sh` script will ensure all dependencies are installed and prepare the system for provisioning.
 
 ### 1. clone repository
 ```bash
 git clone https://github.com/LucaEggenberg/arch.git
 ```
 
-### 2. give execution access
+### 2. grant execution access
 ```bash
 cd arch
 chmod +x install.sh
@@ -160,12 +163,14 @@ chmod +x install.sh
 
 **Review the variables**
 * `arch/ansible/group_vars/all/main.yml`:
-    * `ansible_user`: **Crucial.** Set this to your non-root username
+    * `ansible_user`: Set this to your **non-root** username
     * `ssh_port`: If SSH is not on port 22.
-    * `pacman_packages`: Additional programs installed with pacman
-    * `yay_packages`: Additional programs installed with yay
+    * `desktop_environments`: choose which DE (/ compositor) to install
     * `kb_layout`: Keyboard layout
     * `kb_variant`: Keyboard variant
+    * `pacman_packages`: non-essential packages to pre-install
+    * `yay_packages`: non-essential packages to pre-install via yay
+    * `gpu_packages`: gpu-drivers, default for nvidia
 
 ### [localhost] I would like to configure the computer I cloned this repository on 
 --- 
