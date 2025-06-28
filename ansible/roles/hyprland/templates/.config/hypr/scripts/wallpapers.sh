@@ -7,12 +7,8 @@ TRANSITION_DURATION="0.25"
 # ensure swww is running
 swww-daemon &>/dev/null
 
-WALLPAPERS=$(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print | sed "s|^${WALLPAPER_DIR}/||")
-SELECTED_WALLPAPER_BASENAME=$(echo -e "${WALLPAPERS}" | wofi --dmenu \
-    --prompt "Select Wallpaper" \
-    --parse-input \
-    --insensitive 
-)
+readarray -t WALLPAPERS < <(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print | sed "s|^${WALLPAPER_DIR}/||" | sort)
+SELECTED_WALLPAPER_BASENAME=$(printf "%s\n" "${WALLPAPERS[@]}" | wofi --dmenu --prompt "Select Wallpaper")
 
 if [ -n "$SELECTED_WALLPAPER_BASENAME" ]; then
     FULL_WALLPAPER_PATH="${WALLPAPER_DIR}/${SELECTED_WALLPAPER_BASENAME}"
