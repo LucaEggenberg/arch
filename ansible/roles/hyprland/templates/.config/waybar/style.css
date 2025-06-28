@@ -1,4 +1,4 @@
-@import "colors.css";
+@import 'colors.css';
 
 * {
     border: none;
@@ -10,7 +10,7 @@
 
 window#waybar {
     background-color: alpha(@crust, 0.6);
-    border-radius: 15px; /* Rounded corners for the entire bar */
+    border-radius: 15px;
     transition-property: background-color;
     transition-duration: 0.5s;
 }
@@ -84,16 +84,20 @@ window#waybar.hidden {
 
 #custom-logo {
     padding: 6px 10px;
-    margin-left: 5px;
     font-size: 15px;
-    border-radius: 4px;
+    border-radius: 15px;
     color: @sapphire;
-    background-color: transparent;
     transition: background-color 0.3s ease-in-out;
 }
 
 #custom-logo:hover {
     background-color: @surface0;
+}
+
+#taskbar button:hover {
+    color: @text;
+    background-color: @surface0;
+    border-bottom: 2px solid @text;
 }
 
 #cpu:hover,
