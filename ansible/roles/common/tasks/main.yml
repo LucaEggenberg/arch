@@ -37,6 +37,7 @@
       - base-devel
       - linux-headers
       - mesa-utils
+      - smbclient
 
       # audio
       - pipewire
