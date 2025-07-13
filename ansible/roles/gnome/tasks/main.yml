@@ -4,17 +4,8 @@
 - name: install gnome packages
   pacman:
     name:
-      - gnome-shell
-      - gdm
+      - gnome
       - gnome-tweaks
-      - gnome-shell-extensions
-      - dconf-editor
-      - xdg-desktop-portal-gnome
-      - gnome-disk-utility
-      - gnome-keyring
-      - libsecret
-      - seahorse
-      - thunar
     state: present
     extra_args: "--noconfirm"
   become: true
