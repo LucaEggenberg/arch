@@ -2,23 +2,22 @@
     "layer": "top",
     "position": "top",
     "spacing": 0,
-    "height": 30,
+    "height": 20,
     "margin-left": 10,
     "margin-right": 10,
-    "margin-top": 1,
+    "margin-top": 5,
     "modules-left": [
         "custom/logo",
-        "wlr/taskbar"
+        "hyprland/workspaces"
     ],
     "modules-center": [
-        "hyprland/workspaces"
+        "clock"
     ],
     "modules-right": [
         "cpu",
         "memory",
         "temperature",
         "pulseaudio",
-        "clock",
         "custom/power"
     ],
     "custom/logo": {
@@ -50,24 +49,24 @@
     // System Modules
     "cpu": {
         "interval": 5,
-        "format": "󰍛 CPU {usage}%",
+        "format": "󰓅 {usage}%",
         "tooltip": true
     },
     "memory": {
         "interval": 5,
-        "format": "󰍛 Mem {used:0.1f}G",
+        "format": "󰍛 {used:0.1f}G ",
         "tooltip": true
     },
     "temperature": {
         "interval": 5,
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        "format": " Temp {temperatureC}°C",
+        "format": " {temperatureC}°C",
         "format-critical": " Temp {temperatureC}°C (CRITICAL!)",
         "tooltip": true
     },
     "pulseaudio": {
-        "format": "{icon} Vol {volume}%",
+        "format": "{icon}  {volume}%",
         "format-bluetooth": "󰂰 BT {volume}%",
         "format-muted": "󰝟 Muted",
         "format-icons": {
@@ -86,6 +85,6 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%A, %B %d %Y}</big>\n<small>{calendar}</small>",
-        "format": " {:%I:%M %p}"
+        "format": "{:%H:%M}"
     }
 }

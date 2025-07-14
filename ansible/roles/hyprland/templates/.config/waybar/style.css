@@ -5,12 +5,12 @@
     border-radius: 0;
     min-height: 0;
     font-family: "JetBrainsMono Nerd Font", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 window#waybar {
-    background-color: alpha(@crust, 0.6);
-    border-radius: 15px;
+    background-color: alpha(@crust, 0.8);
+    border-radius: 20px;
     transition-property: background-color;
     transition-duration: 0.5s;
 }
