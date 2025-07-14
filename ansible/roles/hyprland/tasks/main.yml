@@ -20,6 +20,7 @@
       - gnome-keyring
       - libsecret
       - seahorse
+      - hypridle
     state: present
     extra_args: "--noconfirm"
 
