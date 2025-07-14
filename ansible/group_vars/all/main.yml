@@ -11,12 +11,11 @@ kb_layout: "ch"
 kb_variant: ""
 
 pacman_packages:
-  - code
   - firefox
   - spotify-launcher
-  - thunderbird
   - discord
   - steam
+  - proton-vpn
   - neovim
   - gcc
   - ripgrep
@@ -24,6 +23,8 @@ pacman_packages:
 
 yay_packages:
   - 1password
+  - visual-studio-code-bin
+  - proton-mail
 
 gpu_packages:
   - nvidia-dkms
