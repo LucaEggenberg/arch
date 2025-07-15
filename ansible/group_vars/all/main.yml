@@ -15,7 +15,7 @@ pacman_packages:
   - spotify-launcher
   - discord
   - steam
-  - proton-vpn
+  - proton-vpn-gtk-app
   - neovim
   - gcc
   - ripgrep
