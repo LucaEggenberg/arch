@@ -76,6 +76,11 @@
     state: present
     extra_args: "--noconfirm"
 
+- name: install common yay packages
+  shell: |
+    yay -S --noconfirm openrgb-git
+  become: false
+
 - name: install gpu drivers
   pacman:
     name: "{{ gpu_packages }}"
