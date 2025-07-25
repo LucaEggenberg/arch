@@ -16,6 +16,7 @@ pacman_packages:
   - discord
   - steam
   - proton-vpn-gtk-app
+  - kubectl
   - neovim
   - gcc
   - ripgrep
