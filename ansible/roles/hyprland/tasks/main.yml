@@ -34,15 +34,22 @@
   become: false
 
 - name: symlink dotfiles
-  command: "stow .config -t /home/{{ ansible_user }} -d /home/{{ ansible_user }}/.config/dotfiles_source"
+  command: "stow {{ item }} -t /home/{{ ansible_user }} -d /home/{{ ansible_user }}/dotfile_source"
   args:
-    chdir: "/home/{{ ansible_user }}/.config/dotfiles_source"
-  become: yes
-  register: stow_sddm_theme
-  changed_when: "'LINK' in stow_sddm_theme.stdout or 'RESTOW' in stow_sddm_theme.stdout"
+    chdir: "/home/{{ ansible_user }}/dotfile_source"
+  loop:
+    - btop
+    - hypr
+    - kitty
+    - mako
+    - waybar
+    - wlogout
+    - wofi
+  register: stow_dotfiles
+  changed_when: "'LINK' in stow_dotfiles.stdout or 'RESTOW' in stow_dotfiles.stdout"
 
 - name: remove unwanted session files
-  ansible.builtin.file:
+  file:
     path: "{{ item }}"
     state: absent
   become: true
