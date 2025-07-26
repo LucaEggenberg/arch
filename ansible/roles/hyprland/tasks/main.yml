@@ -26,11 +26,11 @@
 
 - name: install hyprland related yay packages
   shell: |
-    yay -S --noconfirm grimblast-git
-    yay -S --noconfirm light
-    yay -S --noconfirm wlogout
-    yay -S --noconfirm swww
-    yay -S --noconfirm catppuccin-cursors-frappe
+    yay -S --noconfirm --needed grimblast-git
+    yay -S --noconfirm --needed light
+    yay -S --noconfirm --needed wlogout
+    yay -S --noconfirm --needed swww
+    yay -S --noconfirm --needed catppuccin-cursors-frappe
   become: false
 
 - name: symlink dotfiles

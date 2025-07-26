@@ -79,7 +79,7 @@
 
 - name: install common yay packages
   shell: |
-    yay -S --noconfirm openrgb-git
+    yay -S --noconfirm --needed openrgb-git
   become: false
 
 - name: install gpu drivers
@@ -108,7 +108,7 @@
 
 - name: install configured yay packages
   shell: |
-    yay -S --noconfirm {{ item }}
+    yay -S --noconfirm --needed {{ item }}
   become: false
   loop: "{{ yay_packages }}"
 
