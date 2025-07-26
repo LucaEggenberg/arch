@@ -138,12 +138,6 @@
     enabled: yes
     state: started
 
-- name: ensure sddm themes directory exists
-  file:
-    path: /usr/share/sddm/themes
-    state: directory
-    mode: '0755'
-
 - name: clone or pull dotfiles
   git:
     repo: "https://github.com/LucaEggenberg/dotfiles.git"
@@ -152,24 +146,37 @@
     single_branch: yes
     update: yes
 
-- name: symlink sddm theme
-  command: "stow sddm-theme -t / -d /home/{{ ansible_user }}/dotfile_source"
-  args:
-    chdir: "/home/{{ ansible_user }}/dotfile_source"
+- name: ensure sddm themes directory exists
+  file:
+    path: /usr/share/sddm/themes
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
   become: yes
-  register: stow_sddm_theme
-  changed_when: "'LINK' in stow_sddm_theme.stdout or 'RESTOW' in stow_sddm_theme.stdout"
-
+  
 - name: symlink sddm config
-  command: "stow sddm -t / -d /home/{{ ansible_user }}/dotfile_source"
-  args:
-    chdir: "/home/{{ ansible_user }}/dotfile_source"
+  file:
+    src: "/home/{{ ansible_user }}/dotfile_source/sddm/etc/sddm.conf"
+    dest: "/etc/sddm.conf"
+    state: link
+    force: yes
+    owner: root
+    group: root
   become: yes
-  register: stow_sddm_config
-  changed_when: "'LINK' in stow_sddm_config.stdout or 'RESTOW' in stow_sddm_config.stdout"
+
+- name: symlink sddm theme
+  file:
+    src: "/home/{{ ansible_user }}/dotfile_source/sddm-theme/usr/share/sddm/themes/catppuccin-frappe"
+    dest: "/usr/share/sddm/themes/catppuccin-frappe"
+    state: link
+    force: yes
+    owner: root
+    group: root
+  become: yes
 
 - name: enable and start sddm
   systemd:
     name: sddm.service
     enabled: yes
-    state: stopped
+    state: started
