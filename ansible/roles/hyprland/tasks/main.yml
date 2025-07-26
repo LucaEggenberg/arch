@@ -51,6 +51,15 @@
   register: stow_dotfiles
   changed_when: "'LINK' in stow_dotfiles.stdout or 'RESTOW' in stow_dotfiles.stdout"
 
+- name: ensure scripts are executable
+  file:
+    path: "{{ item }}"
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  become: false
+  loop: "{{ lookup('file', '/home/{{ ansible_user }}/dotfile_source/**/*.sh', wantlist=True) }}"
+
 - name: remove unwanted session files
   file:
     path: "{{ item }}"
