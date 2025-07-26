@@ -38,6 +38,7 @@
       - linux-headers
       - mesa-utils
       - smbclient
+      - stow
 
       # audio
       - pipewire
@@ -137,52 +138,35 @@
     enabled: yes
     state: started
 
-- name: create config directories
-  file:
-    path: "/home/{{ ansible_user }}/.config/{{ item.path }}"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-  with_filetree: "../templates/.config"
-  when: item.state == "directory"
-
-- name: Render and copy dotfiles
-  template:
-    src: "{{ item.src }}"
-    dest: "/home/{{ ansible_user }}/.config/{{ item.path }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0755'
-  with_filetree: "../templates/.config"
-  when: item.state == "file"
-
 - name: ensure sddm themes directory exists
   file:
     path: /usr/share/sddm/themes
     state: directory
     mode: '0755'
 
-- name: download catpuccin sddm theme
-  get_url: 
-    url: https://github.com/catppuccin/sddm/releases/download/v1.0.0/catppuccin-frappe.zip
-    dest: "/tmp/catpuccin-frappe.zip"
-    mode: '0644'
-  become: true
+- name: clone or pull dotfiles
+  git:
+    repo: "https://github.com/LucaEggenberg/dotfiles.git"
+    dest: /home/{{ ansible_user }}/dotfile_source
+    version: main
+    single_branch: yes
+    update: yes
 
-- name: unzip theme to themes directory
-  unarchive:
-    src: /tmp/catpuccin-frappe.zip
-    dest: /usr/share/sddm/themes/
-    remote_src: yes
-    creates: /usr/share/sddm/themes/catpuccin-frappe
+- name: symlink sddm theme
+  command: "stow sddm-theme -t / -d /home/{{ ansible_user }}/dotfile_source"
+  args:
+    chdir: "/home/{{ ansible_user }}/dotfile_source"
+  become: yes
+  register: stow_sddm_theme
+  changed_when: "'LINK' in stow_sddm_theme.stdout or 'RESTOW' in stow_sddm_theme.stdout"
 
-- name: create sddm config
-  template:
-    src: sddm.conf
-    dest: /etc/sddm.conf
-    owner: root
-    group: root
-    mode: '0644'
+- name: symlink sddm config
+  command: "stow sddm -t / -d /home/{{ ansible_user }}/dotfile_source"
+  args:
+    chdir: "/home/{{ ansible_user }}/dotfile_source"
+  become: yes
+  register: stow_sddm_config
+  changed_when: "'LINK' in stow_sddm_config.stdout or 'RESTOW' in stow_sddm_config.stdout"
 
 - name: enable and start sddm
   systemd:

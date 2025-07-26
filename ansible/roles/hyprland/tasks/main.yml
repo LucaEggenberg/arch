@@ -33,24 +33,13 @@
     yay -S --noconfirm catppuccin-cursors-frappe
   become: false
 
-- name: create config directories
-  file:
-    path: "/home/{{ ansible_user }}/.config/{{ item.path }}"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-  with_filetree: "../templates/.config"
-  when: item.state == "directory"
-
-- name: Render and copy dotfiles
-  template:
-    src: "{{ item.src }}"
-    dest: "/home/{{ ansible_user }}/.config/{{ item.path }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0755'
-  with_filetree: "../templates/.config"
-  when: item.state == "file"
+- name: symlink dotfiles
+  command: "stow .config -t /home/{{ ansible_user }} -d /home/{{ ansible_user }}/.config/dotfiles_source"
+  args:
+    chdir: "/home/{{ ansible_user }}/.config/dotfiles_source"
+  become: yes
+  register: stow_sddm_theme
+  changed_when: "'LINK' in stow_sddm_theme.stdout or 'RESTOW' in stow_sddm_theme.stdout"
 
 - name: remove unwanted session files
   ansible.builtin.file:
