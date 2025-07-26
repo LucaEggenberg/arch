@@ -146,6 +146,7 @@
     single_branch: yes
     force: true
     update: yes
+  become: false
 
 - name: ensure sddm themes directory exists
   file:
