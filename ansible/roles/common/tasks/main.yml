@@ -144,6 +144,7 @@
     dest: /home/{{ ansible_user }}/dotfile_source
     version: main
     single_branch: yes
+    force: true
     update: yes
 
 - name: ensure sddm themes directory exists
