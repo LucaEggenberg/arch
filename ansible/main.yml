@@ -9,16 +9,11 @@
         name: "{{ ansible_user }}"
         groups: "wheel,audio,video,input,storage"
         append: yes
-      when: desktop_environments is defined
     
   roles:
     - role: common
     - role: hyprland
-      when: "'hyprland' in desktop_environments"
     - role: gnome
-      when: "'gnome' in desktop_environments"
-    - role: kde
-      when: "'kde' in desktop_environments"
 
   post_tasks:
     - name: update & cleanup
@@ -33,6 +28,4 @@
       ansible.builtin.reboot:
         reboot_timeout: 300
       when:
-        - desktop_environments is defined
-        - desktop_environments | length > 0
         - ansible_connection != 'local'
