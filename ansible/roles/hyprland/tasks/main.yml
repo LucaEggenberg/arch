@@ -35,30 +35,8 @@
     - catppuccin-cursors-frappe
   become: false
 
-- name: symlink dotfiles
-  command: "stow {{ item }} -t /home/{{ ansible_user }} -d /home/{{ ansible_user }}/dotfile_source"
-  args:
-    chdir: "/home/{{ ansible_user }}/dotfile_source"
-  loop:
-    - btop
-    - hypr
-    - kitty
-    - mako
-    - waybar
-    - wlogout
-    - wofi
-  become: false
-  register: stow_dotfiles
-  changed_when: "'LINK' in stow_dotfiles.stdout or 'RESTOW' in stow_dotfiles.stdout"
-
-- name: ensure scripts are executable
-  file:
-    path: "{{ item }}"
-    mode: '0755'
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-  become: false
-  loop: "{{ lookup('file', '/home/{{ ansible_user }}/dotfile_source/**/*.sh', wantlist=True) }}"
+- name: run dotfile deployment playbook
+  include_playbook: "/home/{{ ansible_user }}/dotfile_source/ansible/playbooks/deploy-dotfiles.yml"
 
 - name: remove unwanted session files
   file:
